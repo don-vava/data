@@ -2,76 +2,87 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Elite Football Stats Dashboard</title>
+    <title>Elite Football Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="data.js"></script>
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-wrapper">
         <aside class="sidebar">
-            <div class="logo">TOP<span>SCORER</span></div>
-            <div class="filters">
-                <div class="input-group">
-                    <label>Recherche Joueur</label>
-                    <input type="text" id="search" placeholder="Nom..." oninput="update()">
-                </div>
-                <div class="input-group">
-                    <label>Championnat</label>
-                    <select id="league" onchange="update()">
-                        <option value="all">Toutes les Ligues</option>
-                        <option value="Premier League">Premier League</option>
-                        <option value="La Liga">La Liga</option>
-                        <option value="Serie A">Serie A</option>
-                        <option value="Bundesliga">Bundesliga</option>
-                        <option value="Ligue 1">Ligue 1</option>
-                        <option value="Liga Portugal">Liga Portugal</option>
-                    </select>
-                </div>
-                <button class="export-btn csv" onclick="exportCSV()"> Exporter Tableau (CSV)</button>
+            <div class="brand">TOP <span>SCORER</span></div>
+            <div class="filter-group">
+                <label>Recherche Joueur</label>
+                <input type="text" id="searchInput" placeholder="Nom..." oninput="updateDashboard()">
             </div>
+            <div class="filter-group">
+                <label>Championnat (6 Ligues)</label>
+                <select id="leagueFilter" onchange="updateDashboard()">
+                    <option value="all">Tous</option>
+                    <option value="Premier League">Premier League</option>
+                    <option value="La Liga">La Liga</option>
+                    <option value="Serie A">Serie A</option>
+                    <option value="Bundesliga">Bundesliga</option>
+                    <option value="Ligue 1">Ligue 1</option>
+                    <option value="Liga Portugal">Liga Portugal</option>
+                </select>
+            </div>
+            <button class="export-btn csv" onclick="exportCSV()"> Exporter en CSV</button>
         </aside>
 
-        <main class="main">
-            <div class="kpi-grid">
-                <div class="card">
-                    <p class="label">BUTS TOTAL</p>
-                    <h1 id="totalGoals">0</h1>
+        <main class="main-content">
+            <div class="kpi-row">
+                <div class="card kpi">
+                    <span class="label">BUTS (TOTAL SÉLECTION)</span>
+                    <span class="value" id="totalGoals">0</span>
                 </div>
-                <div class="card kpi-flex">
-                    <div><p class="label">LIGUE</p><h2 id="leagueName">-</h2></div>
-                    <img id="leagueLogo" src="" alt="">
+                <div class="card kpi-img">
+                    <div class="kpi-text">
+                        <span class="label">CHAMPIONNAT</span>
+                        <span class="value" id="leagueName">-</span>
+                    </div>
+                    <img id="leagueImg" src="" alt="">
                 </div>
-                <div class="card kpi-flex highlight">
-                    <div><p class="label">TOP SCORER</p><h2 id="playerName">-</h2></div>
-                    <img id="playerPhoto" src="" alt="" class="avatar">
-                </div>
-            </div>
-
-            <div class="charts-grid">
-                <div class="card">
-                    <h3>Performance (Ordre Croissant)</h3>
-                    <canvas id="bar"></canvas>
-                    <button class="export-btn png" onclick="download('bar')"> Télécharger PNG</button>
-                </div>
-                <div class="card">
-                    <h3>Efficacité (Buts / Minutes)</h3>
-                    <canvas id="scatter"></canvas>
-                    <button class="export-btn png" onclick="download('scatter')"> Télécharger PNG</button>
+                <div class="card kpi-img highlight">
+                    <div class="kpi-text">
+                        <span class="label">TOP SCORER</span>
+                        <span class="value" id="topPlayerName">-</span>
+                    </div>
+                    <img id="playerImg" src="" alt="" class="avatar">
                 </div>
             </div>
 
-            <div class="card table-card">
-                <h3>Classement des Joueurs</h3>
+            <div class="charts-row">
+                <div class="card chart-container">
+                    <h3>Performance (Buts & Passes D) </h3>
+                    <canvas id="barChart"></canvas>
+                    <button class="dl-btn" onclick="download('barChart', 'performance.png')"> Télecharger Image</button>
+                </div>
+                <div class="card chart-container">
+                    <h3>Efficacité (BUTS/MINUTES)</h3>
+                    <canvas id="scatterChart"></canvas>
+                    <button class="dl-btn" onclick="download('scatterChart', 'efficacite.png')">Télecharger Image</button>
+                </div>
+            </div>
+
+            <div class="card table-container">
+                <h3>Classement Détaillé</h3>
                 <table>
                     <thead>
-                        <tr><th>#</th><th>Joueur</th><th>Club</th><th>Ligue</th><th>Buts</th></tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Joueur</th>
+                            <th>Club</th>
+                            <th>Buts</th>
+                            <th>Passes D.</th>
+                            <th>Ligue</th>
+                        </tr>
                     </thead>
-                    <tbody id="tableBody"></tbody>
+                    <tbody id="playerTable"></tbody>
                 </table>
             </div>
         </main>
     </div>
-    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

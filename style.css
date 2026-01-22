@@ -1,30 +1,32 @@
 :root { --accent: #38bdf8; --card: rgba(15, 23, 42, 0.85); }
 body { 
-    margin: 0; font-family: 'Segoe UI', sans-serif; color: white; 
+    margin: 0; font-family: 'Inter', sans-serif; color: white; 
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('fond de stade.jpg') center/cover no-repeat fixed;
 }
-.app-container { display: flex; height: 100vh; }
-.sidebar { width: 280px; background: #0f172a; padding: 25px; border-right: 1px solid #334155; }
-.logo { font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; }
-.logo span { color: var(--accent); }
-.input-group { margin-bottom: 20px; }
-label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; }
-input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; }
+.app-wrapper { display: flex; height: 100vh; }
+.sidebar { width: 260px; background: rgba(15, 23, 42, 0.95); padding: 30px; border-right: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+.brand { font-size: 1.5rem; font-weight: 900; margin-bottom: 40px; }
+.brand span { color: var(--accent); }
+.filter-group { margin-bottom: 25px; }
+label { display: block; font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; }
+input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: #1e293b; color: white; outline: none; }
 
-.main { flex: 1; padding: 25px; overflow-y: auto; }
-.card { background: var(--card); border-radius: 15px; padding: 20px; margin-bottom: 20px; border: 1px solid #334155; backdrop-filter: blur(10px); }
-.kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.kpi-flex { display: flex; justify-content: space-between; align-items: center; }
-.avatar { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
-#leagueLogo { width: 50px; height: 50px; object-fit: contain; }
+.main-content { flex: 1; padding: 25px; overflow-y: auto; }
+.card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; backdrop-filter: blur(15px); margin-bottom: 25px; }
+.kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.kpi-img { display: flex; justify-content: space-between; align-items: center; }
+.kpi .value { display: block; font-size: 1.8rem; font-weight: bold; color: var(--accent); }
+.label { font-size: 0.75rem; color: #94a3b8; }
+.avatar { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
+#leagueImg { width: 55px; height: 55px; object-fit: contain; }
 
-.charts-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
-canvas { max-height: 280px; margin-bottom: 10px; }
+.charts-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+.chart-container { height: 380px; text-align: center; }
+canvas { max-height: 280px; margin-bottom: 10px; width: 100% !important; }
 
-.export-btn { width: 100%; padding: 10px; border-radius: 6px; cursor: pointer; transition: 0.3s; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-weight: 600; font-size: 12px; }
-.export-btn:hover { background: var(--accent); color: #0f172a; }
-.csv { border-color: #22c55e; color: #22c55e; margin-top: 20px; }
+.dl-btn, .export-btn { background: rgba(56, 189, 248, 0.1); border: 1px solid var(--accent); color: var(--accent); padding: 8px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 0.75rem; }
+.dl-btn:hover, .export-btn:hover { background: var(--accent); color: #0f172a; font-weight: bold; }
+.csv { width: 100%; margin-top: 20px; border-color: #22c55e; color: #22c55e; }
 
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-th, td { padding: 12px; text-align: left; border-bottom: 1px solid #334155; }
-th { font-size: 12px; color: #94a3b8; text-transform: uppercase; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
