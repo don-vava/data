@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Elite Football Stats Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">TOP<span>SCORER</span></div>
+            <div class="filters">
+                <div class="input-group">
+                    <label>Recherche Joueur</label>
+                    <input type="text" id="search" placeholder="Nom..." oninput="update()">
+                </div>
+                <div class="input-group">
+                    <label>Championnat</label>
+                    <select id="league" onchange="update()">
+                        <option value="all">Toutes les Ligues</option>
+                        <option value="Premier League">Premier League</option>
+                        <option value="La Liga">La Liga</option>
+                        <option value="Serie A">Serie A</option>
+                        <option value="Bundesliga">Bundesliga</option>
+                        <option value="Ligue 1">Ligue 1</option>
+                        <option value="Liga Portugal">Liga Portugal</option>
+                    </select>
+                </div>
+                <button class="export-btn csv" onclick="exportCSV()"> Exporter Tableau (CSV)</button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="kpi-grid">
+                <div class="card">
+                    <p class="label">BUTS TOTAL</p>
+                    <h1 id="totalGoals">0</h1>
+                </div>
+                <div class="card kpi-flex">
+                    <div><p class="label">LIGUE</p><h2 id="leagueName">-</h2></div>
+                    <img id="leagueLogo" src="" alt="">
+                </div>
+                <div class="card kpi-flex highlight">
+                    <div><p class="label">TOP SCORER</p><h2 id="playerName">-</h2></div>
+                    <img id="playerPhoto" src="" alt="" class="avatar">
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="card">
+                    <h3>Performance (Ordre Croissant)</h3>
+                    <canvas id="bar"></canvas>
+                    <button class="export-btn png" onclick="download('bar')"> Télécharger PNG</button>
+                </div>
+                <div class="card">
+                    <h3>Efficacité (Buts / Minutes)</h3>
+                    <canvas id="scatter"></canvas>
+                    <button class="export-btn png" onclick="download('scatter')"> Télécharger PNG</button>
+                </div>
+            </div>
+
+            <div class="card table-card">
+                <h3>Classement des Joueurs</h3>
+                <table>
+                    <thead>
+                        <tr><th>#</th><th>Joueur</th><th>Club</th><th>Ligue</th><th>Buts</th></tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
